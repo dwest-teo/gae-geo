@@ -26,7 +26,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
     rh := r.Header
     rwh := w.Header()
 
-    // CORS: Cross-Origin Resource Sharing
+    // CORS config
     if (enableCORS) {
         if origin := rh.Get("Origin"); "" != origin {
             rwh.Set("Access-Control-Allow-Origin", origin)
@@ -48,7 +48,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
     if (nil == err) {
         rwh.Set("Content-Type", "application/json;charset=utf-8")
 
-        // cache control, expires in 60 seconds
+        // cache control, expires in 60 seconds...like nick cage
         rwh.Set("Cache-Control", "private")
         expires := time.Now().Add(time.Duration(60 * time.Second)).UTC()
         rwh.Set("Expires", expires.Format("Mon, Jan 02 2006 15:04:05 GMT"))
